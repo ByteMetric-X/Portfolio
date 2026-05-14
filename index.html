@@ -313,7 +313,7 @@
       <h2 class="section-title reveal">Stego Flag Finder</h2>
       <hr class="section-divider reveal"/>
       <p class="reveal" style="color:var(--muted);margin-bottom:2rem;font-size:0.92rem;">
-        Upload a file to scan for hidden strings, metadata, and common CTF flag patterns. The analyzer supports PNG metadata, TAR file contents, audio tags (WAV/MP3), and raw string extraction for archives like RAR.
+        Upload a file to scan for hidden strings, metadata, and common Capture The Flag (CTF) flag patterns. The analyzer supports PNG metadata, TAR file contents, audio tags (WAV/MP3), and raw string extraction for archives like RAR.
       </p>
       <div class="stego-panel reveal">
         <div class="stego-controls">
@@ -457,7 +457,7 @@
       const stegoStrings = document.getElementById('stegoStrings');
       const stegoStringsEmpty = document.getElementById('stegoStringsEmpty');
 
-      const MAX_FILE_MB = 25; // Browser-friendly cap for client-side parsing.
+      const MAX_FILE_MB = 25; // Browser-friendly cap to keep parsing fast and memory usage low.
       const MAX_FILE_BYTES = MAX_FILE_MB * 1024 * 1024;
       const STRING_MIN_LENGTH = 4;
       const STRING_MAX_COUNT = 1600;
@@ -481,6 +481,7 @@
       const USTAR_OFFSET = 257;
       const USTAR_SIGNATURE = 'ustar';
       const BASE64_REGEX = /^[A-Za-z0-9+/]+={0,2}$/;
+      const ID3_FRAME_ID_PATTERN = /^[A-Z0-9]{4}$/;
       const FLAG_PATTERN = /(?:flag|ctf|picoctf|htb|hackthebox|uiuctf|nahamcon|ractf|dice|gctf|uctf)\{[^}\n]{4,}\}/gi;
       const decoderUtf8 = new TextDecoder('utf-8', { fatal: false });
       const decoderLatin = new TextDecoder('latin1');
@@ -538,7 +539,6 @@
         const results = [];
         const seen = new Set();
         let current = [];
-        let truncated = false;
         const flush = () => {
           if (current.length >= minLength) {
             const value = String.fromCharCode(...current);
@@ -548,15 +548,12 @@
             }
           }
           current = [];
-          truncated = false;
         };
         for (let i = 0; i < bytes.length; i += 1) {
           const byte = bytes[i];
           if (isPrintable(byte)) {
             if (current.length < maxLength) {
               current.push(byte);
-            } else if (!truncated) {
-              truncated = true;
             }
           } else {
             flush();
@@ -652,7 +649,7 @@
 
       const inflateZlib = async (data) => {
         if (!('DecompressionStream' in window)) {
-          return { text: '', note: 'Compressed PNG text found but decompression is not supported in this browser. Try a modern browser with DecompressionStream support.' };
+          return { text: '', note: 'Compressed PNG text found but decompression is not supported in this browser. Check DecompressionStream support or try a modern browser.' };
         }
         try {
           const ds = new DecompressionStream('deflate');
@@ -737,7 +734,9 @@
           const size = parseInt(sizeText, 8) || 0;
           names.push(name);
           offset += 512;
-          const data = bytes.slice(offset, offset + size);
+          const dataEnd = offset + size;
+          if (dataEnd > bytes.length) break;
+          const data = bytes.slice(offset, dataEnd);
           if (size && isMostlyPrintable(data)) {
             const text = decoderUtf8.decode(data).replace(/\0/g, '').trim();
             if (text) results.push(`TAR ${name}: ${truncateText(text)}`);
@@ -806,10 +805,10 @@
         const end = Math.min(buffer.byteLength, offset + tagSize);
         while (offset + 10 <= end) {
           const frameId = readAscii(view, offset, 4);
-          if (!/^[A-Z0-9]{4}$/.test(frameId)) break;
+          if (!ID3_FRAME_ID_PATTERN.test(frameId)) break;
           const frameSize = version === 4
             ? readSyncSafe(view, offset + 4) // ID3v2.4 stores frame sizes as synchsafe integers.
-            : view.getUint32(offset + 4);
+            : view.getUint32(offset + 4); // Earlier versions use standard 32-bit integers.
           if (!frameSize) {
             offset += 10;
             continue;
