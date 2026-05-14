@@ -652,7 +652,7 @@
 
       const inflateZlib = async (data) => {
         if (!('DecompressionStream' in window)) {
-          return { text: '', note: 'Compressed PNG text found but decompression is not supported in this browser. Try a modern browser (Chrome/Edge 80+ or Safari 16.4+).' };
+          return { text: '', note: 'Compressed PNG text found but decompression is not supported in this browser. Try a modern browser with DecompressionStream support.' };
         }
         try {
           const ds = new DecompressionStream('deflate');
@@ -808,7 +808,7 @@
           const frameId = readAscii(view, offset, 4);
           if (!/^[A-Z0-9]{4}$/.test(frameId)) break;
           const frameSize = version === 4
-            ? readSyncSafe(view, offset + 4) // ID3v2.4 stores frame sizes as sync-safe integers.
+            ? readSyncSafe(view, offset + 4) // ID3v2.4 stores frame sizes as synchsafe integers.
             : view.getUint32(offset + 4);
           if (!frameSize) {
             offset += 10;
