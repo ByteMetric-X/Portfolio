@@ -320,7 +320,7 @@
           <label class="stego-file">
             <span>Attach file</span>
             <span class="stego-pill" id="stegoFilename">No file selected</span>
-            <input type="file" id="stegoFile" accept=".png,.rar,.tar,.wav,.mp3,.ogg,audio/*"/>
+            <input type="file" id="stegoFile" accept=".png,.rar,.tar,.wav,.mp3,.ogg"/>
           </label>
           <button class="btn btn-primary" id="stegoAnalyze" disabled>Analyze</button>
           <button class="btn btn-ghost" id="stegoReset">Clear</button>
@@ -457,7 +457,15 @@
       const stegoStrings = document.getElementById('stegoStrings');
       const stegoStringsEmpty = document.getElementById('stegoStringsEmpty');
 
-      const MAX_FILE_BYTES = 25 * 1024 * 1024;
+      const MAX_FILE_MB = 25;
+      const MAX_FILE_BYTES = MAX_FILE_MB * 1024 * 1024;
+      const STRING_MIN_LENGTH = 4;
+      const STRING_MAX_COUNT = 1600;
+      const STRING_MAX_LENGTH = 180;
+      const SAMPLE_LIMIT = 40;
+      const SAMPLE_TRUNCATE = 180;
+      const TEXT_TRUNCATE = 240;
+      const BASE64_REGEX = /^[A-Za-z0-9+/]+={0,2}$/;
       const FLAG_PATTERN = /(?:flag|ctf|picoctf|htb|hackthebox|uiuctf|nahamcon|ractf|dice|gctf|uctf)\{[^}\n]{4,}\}/gi;
       const decoderUtf8 = new TextDecoder('utf-8', { fatal: false });
       const decoderLatin = new TextDecoder('latin1');
@@ -501,7 +509,7 @@
         });
       };
 
-      const truncateText = (text, limit = 220) => (text.length > limit ? `${text.slice(0, limit)}…` : text);
+      const truncateText = (text, limit = TEXT_TRUNCATE) => (text.length > limit ? `${text.slice(0, limit)}…` : text);
       const isPrintable = (byte) => byte >= 32 && byte <= 126;
 
       const isMostlyPrintable = (bytes) => {
@@ -511,7 +519,7 @@
         return printable / bytes.length > 0.85;
       };
 
-      const extractStrings = (bytes, minLength = 4, maxStrings = 1600, maxLength = 180) => {
+      const extractStrings = (bytes, minLength = STRING_MIN_LENGTH, maxStrings = STRING_MAX_COUNT, maxLength = STRING_MAX_LENGTH) => {
         const results = [];
         const seen = new Set();
         let current = [];
@@ -554,19 +562,18 @@
       };
 
       const decodeBase64Hits = (texts) => {
-        const base64Regex = /^[A-Za-z0-9+/]+={0,2}$/;
         const hits = [];
         const flags = [];
         texts.forEach((text) => {
           if (text.length < 12 || text.length > 3000) return;
-          if (text.length % 4 !== 0 || !base64Regex.test(text)) return;
+          if (text.length % 4 !== 0 || !BASE64_REGEX.test(text)) return;
           try {
             const binary = atob(text);
             const bytes = Uint8Array.from(binary, (c) => c.charCodeAt(0));
             if (!isMostlyPrintable(bytes)) return;
             const decoded = decoderUtf8.decode(bytes).replace(/\0/g, '').trim();
             if (!decoded) return;
-            hits.push(`Base64 → ${truncateText(decoded, 240)}`);
+            hits.push(`Base64 → ${truncateText(decoded)}`);
             const decodedFlags = findFlags([decoded]);
             flags.push(...decodedFlags);
           } catch (err) {
@@ -660,7 +667,7 @@
             if (nullIndex > -1) {
               const keyword = decodeNullTerminated(chunk.slice(0, nullIndex));
               const text = decoderLatin.decode(chunk.slice(nullIndex + 1)).trim();
-              if (text) results.push(`PNG ${keyword}: ${truncateText(text, 260)}`);
+              if (text) results.push(`PNG ${keyword}: ${truncateText(text)}`);
             }
           }
           if (type === 'zTXt') {
@@ -670,7 +677,7 @@
               const compressed = chunk.slice(nullIndex + 2);
               const inflated = await inflateZlib(compressed);
               if (inflated.note) notes.push(inflated.note);
-              if (inflated.text) results.push(`PNG ${keyword}: ${truncateText(inflated.text, 260)}`);
+              if (inflated.text) results.push(`PNG ${keyword}: ${truncateText(inflated.text)}`);
             }
           }
           if (type === 'iTXt') {
@@ -689,10 +696,10 @@
               if (compressionFlag === 1) {
                 const inflated = await inflateZlib(textData);
                 if (inflated.note) notes.push(inflated.note);
-                if (inflated.text) results.push(`PNG ${keyword}: ${truncateText(inflated.text, 260)}`);
+                if (inflated.text) results.push(`PNG ${keyword}: ${truncateText(inflated.text)}`);
               } else {
                 const text = decoderUtf8.decode(textData).trim();
-                if (text) results.push(`PNG ${keyword}: ${truncateText(text, 260)}`);
+                if (text) results.push(`PNG ${keyword}: ${truncateText(text)}`);
               }
             }
           }
@@ -717,7 +724,7 @@
           const data = bytes.slice(offset, offset + size);
           if (size && isMostlyPrintable(data)) {
             const text = decoderUtf8.decode(data).replace(/\0/g, '').trim();
-            if (text) results.push(`TAR ${name}: ${truncateText(text, 260)}`);
+            if (text) results.push(`TAR ${name}: ${truncateText(text)}`);
           }
           offset += Math.ceil(size / 512) * 512;
         }
@@ -744,7 +751,7 @@
                 const dataEnd = dataStart + infoSize;
                 if (dataEnd <= buffer.byteLength) {
                   const text = decoderLatin.decode(new Uint8Array(buffer.slice(dataStart, dataEnd))).replace(/\0/g, '').trim();
-                  if (text) results.push(`WAV ${infoId}: ${truncateText(text, 240)}`);
+                  if (text) results.push(`WAV ${infoId}: ${truncateText(text)}`);
                 }
                 listOffset = dataEnd + (infoSize % 2);
               }
@@ -785,7 +792,10 @@
           const frameId = readAscii(view, offset, 4);
           if (!/^[A-Z0-9]{4}$/.test(frameId)) break;
           const frameSize = version === 4 ? readSyncSafe(view, offset + 4) : view.getUint32(offset + 4);
-          if (!frameSize) { offset += 10; continue; }
+          if (!frameSize) {
+            offset += 10;
+            continue;
+          }
           const dataStart = offset + 10;
           const dataEnd = dataStart + frameSize;
           if (dataEnd > end) break;
@@ -793,12 +803,12 @@
           if (frameId.startsWith('T') && frameId !== 'TXXX') {
             const encoding = data[0];
             const text = decodeId3Text(data.slice(1), encoding).replace(/\0/g, '').trim();
-            if (text) results.push(`ID3 ${frameId}: ${truncateText(text, 240)}`);
+            if (text) results.push(`ID3 ${frameId}: ${truncateText(text)}`);
           }
           if (frameId === 'COMM' && data.length > 4) {
             const encoding = data[0];
             const text = decodeId3Text(data.slice(4), encoding).replace(/\0/g, '').trim();
-            if (text) results.push(`ID3 COMM: ${truncateText(text, 240)}`);
+            if (text) results.push(`ID3 COMM: ${truncateText(text)}`);
           }
           offset = dataEnd;
         }
@@ -872,7 +882,7 @@
 
           const textHits = Array.from(new Set([...embeddedTexts, ...base64Findings.hits]));
           const flagHits = Array.from(new Set([...stringFlags, ...base64Findings.flags, ...findFlags(embeddedTexts)]));
-          const sampleStrings = rawStrings.slice(0, 40).map((text) => truncateText(text, 180));
+          const sampleStrings = rawStrings.slice(0, SAMPLE_LIMIT).map((text) => truncateText(text, SAMPLE_TRUNCATE));
 
           updateMeta([
             `Name: ${file.name}`,
