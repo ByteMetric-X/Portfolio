@@ -320,7 +320,7 @@
           <label class="stego-file">
             <span>Attach file</span>
             <span class="stego-pill" id="stegoFilename">No file selected</span>
-            <input type="file" id="stegoFile" accept=".png,.rar,.tar,.wav,.mp3,.ogg"/>
+            <input type="file" id="stegoFile" accept=".png,.rar,.tar,.wav,.mp3,.ogg" aria-label="Stego file upload"/>
           </label>
           <button class="btn btn-primary" id="stegoAnalyze" disabled>Analyze</button>
           <button class="btn btn-ghost" id="stegoReset">Clear</button>
@@ -457,7 +457,7 @@
       const stegoStrings = document.getElementById('stegoStrings');
       const stegoStringsEmpty = document.getElementById('stegoStringsEmpty');
 
-      const MAX_FILE_MB = 25;
+      const MAX_FILE_MB = 25; // Browser-friendly cap for client-side parsing.
       const MAX_FILE_BYTES = MAX_FILE_MB * 1024 * 1024;
       const STRING_MIN_LENGTH = 4;
       const STRING_MAX_COUNT = 1600;
@@ -465,6 +465,21 @@
       const SAMPLE_LIMIT = 40;
       const SAMPLE_TRUNCATE = 180;
       const TEXT_TRUNCATE = 240;
+      const PRINTABLE_THRESHOLD = 0.85;
+      const ASCII_TAB = 9;
+      const ASCII_LF = 10;
+      const ASCII_CR = 13;
+      const BASE64_MIN_LENGTH = 12;
+      const BASE64_MAX_LENGTH = 3000;
+      const PNG_SIGNATURE = [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a];
+      const RAR_SIGNATURE_V4 = [0x52, 0x61, 0x72, 0x21, 0x1a, 0x07, 0x00];
+      const RAR_SIGNATURE_V5 = [0x52, 0x61, 0x72, 0x21, 0x1a, 0x07, 0x01, 0x00];
+      const RIFF_HEADER = 'RIFF';
+      const WAVE_HEADER = 'WAVE';
+      const OGG_HEADER = 'OggS';
+      const ID3_HEADER = 'ID3';
+      const USTAR_OFFSET = 257;
+      const USTAR_SIGNATURE = 'ustar';
       const BASE64_REGEX = /^[A-Za-z0-9+/]+={0,2}$/;
       const FLAG_PATTERN = /(?:flag|ctf|picoctf|htb|hackthebox|uiuctf|nahamcon|ractf|dice|gctf|uctf)\{[^}\n]{4,}\}/gi;
       const decoderUtf8 = new TextDecoder('utf-8', { fatal: false });
@@ -515,8 +530,8 @@
       const isMostlyPrintable = (bytes) => {
         if (!bytes.length) return false;
         let printable = 0;
-        bytes.forEach((b) => { if (isPrintable(b) || b === 9 || b === 10 || b === 13) printable += 1; });
-        return printable / bytes.length > 0.85;
+        bytes.forEach((b) => { if (isPrintable(b) || b === ASCII_TAB || b === ASCII_LF || b === ASCII_CR) printable += 1; });
+        return printable / bytes.length > PRINTABLE_THRESHOLD;
       };
 
       const extractStrings = (bytes, minLength = STRING_MIN_LENGTH, maxStrings = STRING_MAX_COUNT, maxLength = STRING_MAX_LENGTH) => {
@@ -565,7 +580,7 @@
         const hits = [];
         const flags = [];
         texts.forEach((text) => {
-          if (text.length < 12 || text.length > 3000) return;
+          if (text.length < BASE64_MIN_LENGTH || text.length > BASE64_MAX_LENGTH) return;
           if (text.length % 4 !== 0 || !BASE64_REGEX.test(text)) return;
           try {
             const binary = atob(text);
@@ -598,16 +613,17 @@
 
       const detectFileType = (file, bytes) => {
         const name = file.name.toLowerCase();
+        const view = new DataView(bytes.buffer);
         const matchBytes = (signature, offset = 0) => signature.every((b, i) => bytes[offset + i] === b);
-        const isPng = bytes.length > 8 && matchBytes([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
-        const isRar = bytes.length > 7 && (matchBytes([0x52, 0x61, 0x72, 0x21, 0x1a, 0x07, 0x00]) || matchBytes([0x52, 0x61, 0x72, 0x21, 0x1a, 0x07, 0x01, 0x00]));
-        const isWav = bytes.length > 12 && readAscii(new DataView(bytes.buffer), 0, 4) === 'RIFF' && readAscii(new DataView(bytes.buffer), 8, 4) === 'WAVE';
-        const isOgg = bytes.length > 4 && readAscii(new DataView(bytes.buffer), 0, 4) === 'OggS';
-        const isMp3 = bytes.length > 3 && (readAscii(new DataView(bytes.buffer), 0, 3) === 'ID3' || (bytes[0] === 0xff && (bytes[1] & 0xe0) === 0xe0));
+        const isPng = bytes.length > PNG_SIGNATURE.length && matchBytes(PNG_SIGNATURE);
+        const isRar = bytes.length > RAR_SIGNATURE_V4.length && (matchBytes(RAR_SIGNATURE_V4) || matchBytes(RAR_SIGNATURE_V5));
+        const isWav = bytes.length > 12 && readAscii(view, 0, 4) === RIFF_HEADER && readAscii(view, 8, 4) === WAVE_HEADER;
+        const isOgg = bytes.length > 4 && readAscii(view, 0, 4) === OGG_HEADER;
+        const isMp3 = bytes.length > 3 && (readAscii(view, 0, 3) === ID3_HEADER || (bytes[0] === 0xff && (bytes[1] & 0xe0) === 0xe0));
         let isTar = false;
         if (bytes.length > 262) {
-          const ustar = readAscii(new DataView(bytes.buffer), 257, 5);
-          isTar = ustar === 'ustar';
+          const ustar = readAscii(view, USTAR_OFFSET, USTAR_SIGNATURE.length);
+          isTar = ustar === USTAR_SIGNATURE;
         }
         const notes = [];
         let type = 'unknown';
@@ -636,7 +652,7 @@
 
       const inflateZlib = async (data) => {
         if (!('DecompressionStream' in window)) {
-          return { text: '', note: 'Compressed PNG text found but decompression is not supported in this browser.' };
+          return { text: '', note: 'Compressed PNG text found but decompression is not supported in this browser. Try a modern browser (Chrome/Edge 80+ or Safari 16.4+).' };
         }
         try {
           const ds = new DecompressionStream('deflate');
@@ -791,7 +807,9 @@
         while (offset + 10 <= end) {
           const frameId = readAscii(view, offset, 4);
           if (!/^[A-Z0-9]{4}$/.test(frameId)) break;
-          const frameSize = version === 4 ? readSyncSafe(view, offset + 4) : view.getUint32(offset + 4);
+          const frameSize = version === 4
+            ? readSyncSafe(view, offset + 4) // ID3v2.4 stores frame sizes as sync-safe integers.
+            : view.getUint32(offset + 4);
           if (!frameSize) {
             offset += 10;
             continue;
