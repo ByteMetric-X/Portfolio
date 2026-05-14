@@ -318,14 +318,14 @@
       <div class="stego-panel reveal">
         <div class="stego-controls">
           <label class="stego-file" for="stegoFile">
-            <span>Attach file</span>
+            <span>Attach stego file</span>
             <span class="stego-pill" id="stegoFilename">No file selected</span>
             <input type="file" id="stegoFile" accept=".png,.rar,.tar,.wav,.mp3,.ogg" aria-label="Stego file upload"/>
           </label>
           <button class="btn btn-primary" id="stegoAnalyze" disabled>Analyze</button>
           <button class="btn btn-ghost" id="stegoReset">Clear</button>
         </div>
-        <div class="stego-status" id="stegoStatus">Supported: .png, .tar, .rar (string scan), .wav, .mp3, .ogg.</div>
+        <div class="stego-status" id="stegoStatus" role="status" aria-live="polite">Supported: .png, .tar, .rar (string scan), .wav, .mp3, .ogg.</div>
         <div class="stego-meta" id="stegoMeta">
           <span>Awaiting file upload.</span>
         </div>
@@ -457,7 +457,7 @@
       const stegoStrings = document.getElementById('stegoStrings');
       const stegoStringsEmpty = document.getElementById('stegoStringsEmpty');
 
-      const MAX_FILE_MB = 25; // Browser-friendly cap to keep parsing fast and memory usage low.
+      const MAX_FILE_MB = 25; // Browser-friendly cap to keep parsing fast on lower-end devices.
       const MAX_FILE_BYTES = MAX_FILE_MB * 1024 * 1024;
       const STRING_MIN_LENGTH = 4;
       const STRING_MAX_COUNT = 1600;
@@ -471,6 +471,11 @@
       const ASCII_CR = 13;
       const BASE64_MIN_LENGTH = 12;
       const BASE64_MAX_LENGTH = 3000;
+      const MAX_ID3_TAG_BYTES = 2 * 1024 * 1024;
+      const ID3_SUPPORTED_MIN_VERSION = 3;
+      const ID3_SUPPORTED_MAX_VERSION = 4;
+      const ID3_BOM_BE = 0xfeff;
+      const ID3_BOM_LE = 0xfffe;
       const PNG_SIGNATURE = [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a];
       const RAR_SIGNATURE_V4 = [0x52, 0x61, 0x72, 0x21, 0x1a, 0x07, 0x00];
       const RAR_SIGNATURE_V5 = [0x52, 0x61, 0x72, 0x21, 0x1a, 0x07, 0x01, 0x00];
@@ -650,7 +655,7 @@
 
       const inflateZlib = async (data) => {
         if (!('DecompressionStream' in window)) {
-          return { text: '', note: 'Browser does not support PNG text decompression. Try a modern browser.' };
+          return { text: '', note: 'DecompressionStream API is not available. Use a browser that supports PNG text decompression.' };
         }
         try {
           const ds = new DecompressionStream('deflate');
@@ -780,7 +785,14 @@
 
       const decodeId3Text = (bytes, encoding) => {
         try {
-          if (encoding === 1) return new TextDecoder('utf-16').decode(bytes);
+          if (encoding === 1) {
+            if (bytes.length >= 2) {
+              const bom = (bytes[0] << 8) | bytes[1];
+              if (bom === ID3_BOM_BE) return new TextDecoder('utf-16be').decode(bytes.slice(2));
+              if (bom === ID3_BOM_LE) return new TextDecoder('utf-16le').decode(bytes.slice(2));
+            }
+            return new TextDecoder('utf-16').decode(bytes);
+          }
           if (encoding === 2) return new TextDecoder('utf-16be').decode(bytes);
           if (encoding === 3) return decoderUtf8.decode(bytes);
           return decoderLatin.decode(bytes);
@@ -801,7 +813,9 @@
         const view = new DataView(buffer);
         if (readAscii(view, 0, 3) !== 'ID3') return results;
         const version = view.getUint8(3);
+        if (version < ID3_SUPPORTED_MIN_VERSION || version > ID3_SUPPORTED_MAX_VERSION) return results;
         const tagSize = readSyncSafe(view, 6);
+        if (!tagSize || tagSize > Math.min(MAX_ID3_TAG_BYTES, buffer.byteLength - 10)) return results;
         let offset = 10;
         const end = Math.min(buffer.byteLength, offset + tagSize);
         while (offset + 10 <= end) {
