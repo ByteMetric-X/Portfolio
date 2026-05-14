@@ -317,7 +317,7 @@
       </p>
       <div class="stego-panel reveal">
         <div class="stego-controls">
-          <label class="stego-file">
+          <label class="stego-file" for="stegoFile">
             <span>Attach file</span>
             <span class="stego-pill" id="stegoFilename">No file selected</span>
             <input type="file" id="stegoFile" accept=".png,.rar,.tar,.wav,.mp3,.ogg" aria-label="Stego file upload"/>
@@ -482,6 +482,7 @@
       const USTAR_SIGNATURE = 'ustar';
       const BASE64_REGEX = /^[A-Za-z0-9+/]+={0,2}$/;
       const ID3_FRAME_ID_PATTERN = /^[A-Z0-9]{4}$/;
+      const LITTLE_ENDIAN = true;
       const FLAG_PATTERN = /(?:flag|ctf|picoctf|htb|hackthebox|uiuctf|nahamcon|ractf|dice|gctf|uctf)\{[^}\n]{4,}\}/gi;
       const decoderUtf8 = new TextDecoder('utf-8', { fatal: false });
       const decoderLatin = new TextDecoder('latin1');
@@ -649,7 +650,7 @@
 
       const inflateZlib = async (data) => {
         if (!('DecompressionStream' in window)) {
-          return { text: '', note: 'Compressed PNG text found but decompression is not supported in this browser. Check DecompressionStream support or try a modern browser.' };
+          return { text: '', note: 'Browser does not support PNG text decompression. Try a modern browser.' };
         }
         try {
           const ds = new DecompressionStream('deflate');
@@ -753,7 +754,7 @@
         let offset = 12;
         while (offset + 8 <= buffer.byteLength) {
           const chunkId = readAscii(view, offset, 4);
-          const size = view.getUint32(offset + 4, true);
+          const size = view.getUint32(offset + 4, LITTLE_ENDIAN);
           const chunkStart = offset + 8;
           if (chunkId === 'LIST' && chunkStart + 4 <= buffer.byteLength) {
             const listType = readAscii(view, chunkStart, 4);
@@ -761,7 +762,7 @@
               let listOffset = chunkStart + 4;
               while (listOffset + 8 <= chunkStart + size) {
                 const infoId = readAscii(view, listOffset, 4);
-                const infoSize = view.getUint32(listOffset + 4, true);
+                const infoSize = view.getUint32(listOffset + 4, LITTLE_ENDIAN);
                 const dataStart = listOffset + 8;
                 const dataEnd = dataStart + infoSize;
                 if (dataEnd <= buffer.byteLength) {
@@ -808,7 +809,7 @@
           if (!ID3_FRAME_ID_PATTERN.test(frameId)) break;
           const frameSize = version === 4
             ? readSyncSafe(view, offset + 4) // ID3v2.4 stores frame sizes as synchsafe integers.
-            : view.getUint32(offset + 4); // Earlier versions use standard 32-bit integers.
+            : view.getUint32(offset + 4, false); // Earlier versions use standard 32-bit integers.
           if (!frameSize) {
             offset += 10;
             continue;
