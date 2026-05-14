@@ -139,6 +139,7 @@
     .stego-list li { border-left: 2px solid var(--border); padding-left: 0.5rem; word-break: break-word; }
     .stego-empty { color: var(--muted); font-size: 0.74rem; font-family: var(--mono); }
     .stego-pill { display: inline-block; font-family: var(--mono); font-size: 0.65rem; padding: 0.2rem 0.55rem; border: 1px solid var(--border); border-radius: 999px; color: var(--accent2); margin-right: 0.4rem; margin-bottom: 0.4rem; }
+    .stego-filename { max-width: 240px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
     /* Experience */
     .exp-bar { display: grid; grid-template-columns: 110px 1fr; gap: 2rem; padding: 2rem 0; border-bottom: 1px solid var(--border); }
@@ -319,7 +320,7 @@
         <div class="stego-controls">
           <label class="stego-file" for="stegoFile">
             <span>Attach stego file</span>
-            <span class="stego-pill" id="stegoFilename">No file selected</span>
+            <span class="stego-pill stego-filename" id="stegoFilename">No file selected</span>
             <input type="file" id="stegoFile" accept=".png,.rar,.tar,.wav,.mp3,.ogg" aria-label="Stego file upload"/>
           </label>
           <button class="btn btn-primary" id="stegoAnalyze" disabled>Analyze</button>
@@ -461,9 +462,10 @@
       const MAX_FILE_BYTES = MAX_FILE_MB * 1024 * 1024;
       const STRING_MIN_LENGTH = 4;
       const STRING_MAX_COUNT = 1600;
-      const STRING_MAX_LENGTH = 180;
+      const STRING_TRUNCATE = 180;
+      const STRING_MAX_LENGTH = STRING_TRUNCATE;
       const SAMPLE_LIMIT = 40;
-      const SAMPLE_TRUNCATE = 180;
+      const SAMPLE_TRUNCATE = STRING_TRUNCATE;
       const TEXT_TRUNCATE = 240;
       const PRINTABLE_THRESHOLD = 0.85;
       const ASCII_TAB = 9;
@@ -655,7 +657,7 @@
 
       const inflateZlib = async (data) => {
         if (!('DecompressionStream' in window)) {
-          return { text: '', note: 'DecompressionStream API is not available. Use a browser that supports PNG text decompression.' };
+          return { text: '', note: 'DecompressionStream API is not available. Use a recent Chrome/Edge/Firefox/Safari build for PNG text decompression.' };
         }
         try {
           const ds = new DecompressionStream('deflate');
@@ -823,7 +825,7 @@
           if (!ID3_FRAME_ID_PATTERN.test(frameId)) break;
           const frameSize = version === 4
             ? readSyncSafe(view, offset + 4) // ID3v2.4 stores frame sizes as synchsafe integers.
-            : view.getUint32(offset + 4, false); // Earlier versions use standard 32-bit integers.
+            : view.getUint32(offset + 4, false); // ID3v2.3 and earlier use standard 32-bit integers.
           if (!frameSize) {
             offset += 10;
             continue;
