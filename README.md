@@ -81,3 +81,4 @@ of submitting — nothing breaks.
 - [ ] Add a real Open Graph image at `public/og-image.png` (1200×630px)
 - [ ] Set up the Supabase table and secrets above
 - [ ] Swap the favicon if you want something more custom than the current mark
+ 
