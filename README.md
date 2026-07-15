@@ -75,24 +75,10 @@ Full case studies (problem → approach → result) for each project are on **[h
 
 ---
 
-## Certifications
+## 📫 Let's connect
 
-- **Google Data Analytics Professional Certificate** — Coursera *(in progress)*
-
----
-
-## GitHub Stats
+Working on something data-heavy, or want to talk forecasting, dashboards, or AI-assisted builds? Reach out on my socials.
 
 <div align="center">
 
-![Hassan's GitHub stats](https://github-readme-stats.vercel.app/api?username=ByteMetric-X&show_icons=true&theme=dark&hide_border=true&count_private=true)
-
-</div>
-
----
-
-## Contact
-
-Open to discussing data analytics, forecasting, dashboarding, or AI-assisted development work.
-
-📧 [heymehassan@gmail.com](mailto:heymehassan@gmail.com) · 🔗 [LinkedIn](https://linkedin.com/in/REPLACE_ME) · 🌐 [heymehassan.me](https://heymehassan.me)
+*Built with 🖤 and a lot of coffee.*
