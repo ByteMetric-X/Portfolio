@@ -42,7 +42,7 @@ export function Hero() {
           transition={{ delay: 0.1, duration: 0.6 }}
           className="mb-6 font-mono text-xs uppercase tracking-widest text-fg-muted"
         >
-          Hassan / Business Data Analytics, COMSATS
+          Hassan / Business Data Analyst
         </motion.p>
 
         <h1 className="text-balance max-w-4xl overflow-hidden font-display text-[9vw] font-medium leading-[0.98] tracking-tight text-fg md:text-[5.2vw]">
