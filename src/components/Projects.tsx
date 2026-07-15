@@ -48,17 +48,6 @@ const PROJECTS: Project[] = [
     result: 'A working full-stack app covering auth, persistence, and a custom project system — currently local and private.',
     links: [{ label: 'GitHub', href: 'https://github.com/ByteMetric-X' }],
   },
-  {
-    slug: 'this-site',
-    name: 'This portfolio',
-    tag: 'Personal build',
-    stack: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'GSAP', 'Three.js', 'Supabase'],
-    problem:
-      'Needed a portfolio that reads as deliberately designed rather than templated, deployable on GitHub Pages with real backend logic.',
-    approach:
-      'Built a monochrome, typography-led design system with scroll-driven motion and a minimal 3D detail, using Supabase for backend logic since GitHub Pages only serves static files.',
-    result: 'The site you\u2019re looking at right now.',
-  },
 ]
 
 export function Projects() {
