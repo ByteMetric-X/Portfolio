@@ -32,30 +32,17 @@ export function Nav() {
       style={{ pointerEvents: atTop ? 'auto' : 'none' }}
       className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-5 md:px-12"
     >
-      
-        href="#top"
-        data-cursor-hover
-        className="font-display text-sm tracking-widest text-fg uppercase"
-      >
+      <a href="#top" data-cursor-hover className="font-display text-sm tracking-widest text-fg uppercase">
         Hassan
       </a>
       <nav className="hidden gap-8 md:flex">
         {LINKS.map((l) => (
-          
-            key={l.href}
-            href={l.href}
-            data-cursor-hover
-            className="font-mono text-xs uppercase tracking-widest text-fg-muted transition-colors hover:text-fg"
-          >
+          <a key={l.href} href={l.href} data-cursor-hover className="font-mono text-xs uppercase tracking-widest text-fg-muted transition-colors hover:text-fg">
             {l.label}
           </a>
         ))}
       </nav>
-      
-        href="/resume.pdf"
-        data-cursor-hover
-        className="font-mono text-xs uppercase tracking-widest text-fg-muted transition-colors hover:text-fg"
-      >
+      <a href="/resume.pdf" data-cursor-hover className="font-mono text-xs uppercase tracking-widest text-fg-muted transition-colors hover:text-fg">
         Resume ↓
       </a>
     </motion.header>
