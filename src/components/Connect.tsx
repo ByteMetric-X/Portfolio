@@ -18,7 +18,7 @@ const LINKS: { label: string; sub: string; href: string; icon: LucideIcon }[] = 
   },
   {
     label: 'Email',
-    sub: 'heymehassan@gmail.com',
+    sub: 'Send me a message',
     href: 'https://mail.google.com/mail/?view=cm&fs=1&to=heymehassan@gmail.com',
     icon: AtSign,
   },
