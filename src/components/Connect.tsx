@@ -16,9 +16,13 @@ const LINKS: { label: string; sub: string; href: string; icon: LucideIcon }[] = 
     href: 'https://www.upwork.com/freelancers/~01319d1686c0ec36fa?mp_source=share',
     icon: Briefcase,
   },
-  { label: 'Email', sub: 'heymehassan@gmail.com', href: 'mailto:heymehassan@gmail.com', icon: AtSign },
+  {
+    label: 'Email',
+    sub: 'heymehassan@gmail.com',
+    href: 'https://mail.google.com/mail/?view=cm&fs=1&to=heymehassan@gmail.com',
+    icon: AtSign,
+  },
 ]
-
 export function Connect() {
   return (
     <Reveal delay={0.15}>
