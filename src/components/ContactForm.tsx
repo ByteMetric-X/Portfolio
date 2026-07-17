@@ -91,7 +91,7 @@ export function ContactForm() {
                     name="email"
                     type="email"
                     required
-                    className="w-full border-b border-line bg-transparent py-2 text-fg outline-none focus:border-fg"
+                    className="w-full border-b border-line bg-transparent px-1 py-3 text-fg outline-none focus:border-fg"
                   />
                 </div>
                 <div>
@@ -103,7 +103,7 @@ export function ContactForm() {
                     name="message"
                     required
                     rows={4}
-                    className="w-full border-b border-line bg-transparent py-2 text-fg outline-none focus:border-fg"
+                    className="w-full border-b border-line bg-transparent px-1 py-3 text-fg outline-none focus:border-fg"
                   />
                 </div>
 
@@ -117,8 +117,7 @@ export function ContactForm() {
                   type="submit"
                   disabled={status === 'sending'}
                   data-cursor-hover
-                  className="border border-fg px-6 py-3 font-mono text-xs uppercase tracking-widest text-fg transition-colors hover:bg-fg hover:text-bg disabled:opacity-50"
-                >
+                  className="w-full border-b border-line bg-transparent px-1 py-3 text-fg outline-none focus:border-fg"                >
                   {status === 'sending' ? 'Sending…' : 'Send message'}
                 </button>
               </motion.form>
