@@ -17,8 +17,7 @@ export function About() {
           <p className="text-base leading-relaxed text-fg-muted">
             Hi, I'm Hassan — a Business Data Analytics student at COMSATS working with
             dashboards, forecasting, and increasingly AI-assisted tooling, with a growing
-            curiosity about data science. That's the polished version. Here's the actual
-            one.
+            curiosity about data science.
           </p>
         </Reveal>
 
