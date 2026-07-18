@@ -4,9 +4,9 @@ import { motion } from 'framer-motion'
 import { ForecastCanvas } from './ForecastCanvas'
 
 const HEADLINE_WORDS = [
-  'Data', 'analyst', 'turning', 'raw', 'business', 'data', 'into',
-  'forecasts', 'and', 'dashboards', '—', 'built', 'faster', 'with',
-  'AI-assisted', 'tooling.',
+  'Data', 'analyst', 'turning', 'business', 'data', 'into',
+  'dashboards', 'and', 'forecasts', ',', 'using', 'AI-assisted',
+  'development', 'to', 'deliver', 'efficiently.',
 ]
 
 export function Hero() {
