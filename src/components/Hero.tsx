@@ -31,7 +31,7 @@ export function Hero() {
     <section
       id="top"
       ref={scope}
-      className="relative flex min-h-screen flex-col justify-end overflow-hidden border-b border-line px-6 pb-16 pt-32 md:px-12 md:pb-24"
+      className="relative flex min-h-[75vh] flex-col justify-center overflow-hidden border-b border-line px-6 pb-16 pt-32 md:min-h-screen md:justify-end md:px-12 md:pb-24"
     >
       <ForecastCanvas />
 
