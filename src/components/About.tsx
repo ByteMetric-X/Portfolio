@@ -1,60 +1,59 @@
 import { Reveal } from './Reveal'
 
-const TIMELINE = [
-  {
-    year: '2024',
-    title: 'Started Business Data Analytics at COMSATS',
-    body:
-      'Began formal coursework in data mining, statistics, and business analysis, while building a habit of turning classroom assignments into shippable, documented projects instead of one-off submissions.',
-  },
-  {
-    year: '2025',
-    title: 'Picked up AI-assisted development',
-    body:
-      'Started pairing data-analysis work with hands-on full-stack building — integrating LLM APIs, wiring up Supabase-backed apps, and using AI tooling to move from idea to working software faster.',
-  },
-  {
-    year: '2025 — ongoing',
-    title: 'Building Dice, a full-stack AI chat app',
-    body:
-      'Designing and shipping Dice end to end: authentication, persistence, a projects system with per-project instructions, and a considered interface — the largest independent build so far.',
-  },
-  {
-    year: 'Now',
-    title: 'Freelancing and formalizing the skill set',
-    body:
-      'Building an Upwork presence, working through the Google Data Analytics Professional Certificate, and consolidating everything — forecasting, dashboards, AI-assisted builds — into a coherent practice.',
-  },
-]
-
 export function About() {
   return (
-    <section id="about" className="border-b border-line px-6 py-16 md:px-12 md:py-24">
+    <section id="about" className="border-b border-line px-6 py-24 md:px-12 md:py-32">
       <Reveal>
         <p className="mb-4 font-mono text-xs uppercase tracking-widest text-fg-muted">
           / about
         </p>
         <h2 className="max-w-2xl font-display text-3xl font-medium leading-tight text-fg md:text-4xl">
-          Trained in analytics, shaped by building things end to end.
+          A pretty honest origin story.
         </h2>
       </Reveal>
 
-      <div className="mt-16 max-w-3xl divide-y divide-line border-t border-line">
-        {TIMELINE.map((item, i) => (
-          <Reveal key={item.title} delay={i * 0.06}>
-            <div className="grid grid-cols-1 gap-3 py-8 md:grid-cols-[140px_1fr]">
-              <span className="font-mono text-xs uppercase tracking-widest text-fg-dim">
-                {item.year}
-              </span>
-              <div>
-                <h3 className="font-display text-lg text-fg md:text-xl">{item.title}</h3>
-                <p className="mt-2 max-w-xl font-body text-sm leading-relaxed text-fg-muted">
-                  {item.body}
-                </p>
-              </div>
-            </div>
-          </Reveal>
-        ))}
+      <div className="mt-12 max-w-2xl space-y-6 border-t border-line pt-10">
+        <Reveal delay={0.05}>
+          <p className="text-base leading-relaxed text-fg-muted">
+            Every origin story needs an honest villain, and mine is merit lists. Fresh out
+            of intermediate, I did what half of Pakistan does at eighteen — chased Computer
+            Science and Cybersecurity for the promise of a good salary, not because I'd had
+            some early love affair with code. It was the safe, high-demand bet.
+          </p>
+        </Reveal>
+
+        <Reveal delay={0.1}>
+          <p className="text-base leading-relaxed text-fg-muted">
+            The year I applied, CS merit numbers went up like they'd read too many LinkedIn
+            posts. I didn't make the cut anywhere — except one seat, in a program I'd ranked
+            dead last on my list: Business Data Analytics.
+          </p>
+        </Reveal>
+
+        <Reveal delay={0.15}>
+          <p className="text-base leading-relaxed text-fg-muted">
+            I could've waited a year and tried again. Instead, I enrolled — mostly to avoid
+            burning twelve months on a gap year and a "we'll see" plan.
+          </p>
+        </Reveal>
+
+        <Reveal delay={0.2}>
+          <p className="text-base leading-relaxed text-fg-muted">
+            Four semesters later, the joke's on eighteen-year-old me — I actually like this.
+            Forecasting models, dashboards, the whole discipline of turning noise into a
+            decision — it turned out to be the thing I didn't know I wanted. I'm genuinely
+            curious now about where data science takes it further.
+          </p>
+        </Reveal>
+
+        <Reveal delay={0.25}>
+          <p className="border-t border-line pt-6 font-display text-lg leading-relaxed text-fg">
+            If you're stuck where I was — unsure, chasing the safe bet, picking your "last
+            priority" option — that's a completely normal place to start. Keep going, keep
+            building, and eventually the thing that excites you finds you. Everything after
+            that is just history.
+          </p>
+        </Reveal>
       </div>
     </section>
   )
