@@ -8,12 +8,12 @@
 
 <br/>
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/REPLACE_ME)
-[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ByteMetric-X)
-[![Kaggle](https://img.shields.io/badge/Kaggle-20BEFF?style=for-the-badge&logo=kaggle&logoColor=white)](https://www.kaggle.com/bytemetric0x)
-[![Upwork](https://img.shields.io/badge/Upwork-6FDA44?style=for-the-badge&logo=upwork&logoColor=white)](https://www.upwork.com/freelancers/REPLACE_ME)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-000000?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/hassan-shahid-668a8041a)
+[![GitHub](https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ByteMetric-X)
+[![Kaggle](https://img.shields.io/badge/Kaggle-000000?style=for-the-badge&logo=kaggle&logoColor=white)](https://www.kaggle.com/bytemetric0x)
+[![Upwork](https://img.shields.io/badge/Upwork-000000?style=for-the-badge&logo=upwork&logoColor=white)](https://www.upwork.com/freelancers/~01319d1686c0ec36fa?mp_source=share)
 [![Portfolio](https://img.shields.io/badge/Portfolio-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://heymehassan.me)
-[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:heymehassan@gmail.com)
+[![Email](https://img.shields.io/badge/Email-000000?style=for-the-badge&logo=gmail&logoColor=white)](mailto:heymehassan@gmail.com)
 
 </div>
 
@@ -34,31 +34,31 @@ Business Data Analytics student at COMSATS University Islamabad, working as a ju
 
 **Data Analytics & Machine Learning**
 
-![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
-![SQL](https://img.shields.io/badge/SQL-4479A1?style=flat-square&logo=postgresql&logoColor=white)
-![scikit--learn](https://img.shields.io/badge/scikit--learn-F7931E?style=flat-square&logo=scikitlearn&logoColor=white)
-![Pandas](https://img.shields.io/badge/pandas-150458?style=flat-square&logo=pandas&logoColor=white)
-![NumPy](https://img.shields.io/badge/NumPy-013243?style=flat-square&logo=numpy&logoColor=white)
-![Power BI](https://img.shields.io/badge/Power_BI-F2C811?style=flat-square&logo=powerbi&logoColor=black)
-![Excel](https://img.shields.io/badge/Excel-217346?style=flat-square&logo=microsoftexcel&logoColor=white)
+![Python](https://img.shields.io/badge/Python-000000?style=flat-square&logo=python&logoColor=white)
+![SQL](https://img.shields.io/badge/SQL-000000?style=flat-square&logo=postgresql&logoColor=white)
+![scikit--learn](https://img.shields.io/badge/scikit--learn-000000?style=flat-square&logo=scikitlearn&logoColor=white)
+![Pandas](https://img.shields.io/badge/pandas-000000?style=flat-square&logo=pandas&logoColor=white)
+![NumPy](https://img.shields.io/badge/NumPy-000000?style=flat-square&logo=numpy&logoColor=white)
+![Power BI](https://img.shields.io/badge/Power_BI-000000?style=flat-square&logo=powerbi&logoColor=white)
+![Excel](https://img.shields.io/badge/Excel-000000?style=flat-square&logo=microsoftexcel&logoColor=white)
 
 *Also: machine learning fundamentals, statistical analysis, time series forecasting (SARIMAX), DAX, data cleaning & visualization*
 
 **AI-Assisted Development**
 
-![React](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
-![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white)
-![Supabase](https://img.shields.io/badge/Supabase-3FCF8E?style=flat-square&logo=supabase&logoColor=white)
+![React](https://img.shields.io/badge/React-000000?style=flat-square&logo=react&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-000000?style=flat-square&logo=typescript&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-000000?style=flat-square&logo=nodedotjs&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-000000?style=flat-square&logo=supabase&logoColor=white)
 ![OpenRouter](https://img.shields.io/badge/OpenRouter-000000?style=flat-square&logo=openai&logoColor=white)
 
 *Also: REST API integration, LLM-powered application development*
 
 **Tools**
 
-![Git](https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white)
-![VS Code](https://img.shields.io/badge/VS_Code-007ACC?style=flat-square&logo=visualstudiocode&logoColor=white)
-![Jupyter](https://img.shields.io/badge/Jupyter-F37626?style=flat-square&logo=jupyter&logoColor=white)
+![Git](https://img.shields.io/badge/Git-000000?style=flat-square&logo=git&logoColor=white)
+![VS Code](https://img.shields.io/badge/VS_Code-000000?style=flat-square&logo=visualstudiocode&logoColor=white)
+![Jupyter](https://img.shields.io/badge/Jupyter-000000?style=flat-square&logo=jupyter&logoColor=white)
 
 ---
 
@@ -75,10 +75,12 @@ Full case studies (problem → approach → result) for each project are on **[h
 
 ---
 
-## 📫 Let's connect
+## Let's connect
 
-Working on something data-heavy, or want to talk forecasting, dashboards, or AI-assisted builds? Reach out on my socials.
+Working on something data-heavy, or want to talk forecasting, dashboards, or AI-assisted builds? Reach out on my socials above.
 
 <div align="center">
 
 *Built with 🖤 and a lot of coffee.*
+
+</div>
