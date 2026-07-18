@@ -16,8 +16,7 @@ export function About() {
         <Reveal delay={0.05}>
           <p className="text-base leading-relaxed text-fg-muted">
             Hi, I'm Hassan. I'm a Business Data Analytics student at COMSATS working with
-            dashboards, forecasting, and increasingly AI-assisted tooling, with a growing
-            curiosity about data science.
+            dashboards, forecasting, and increasingly AI-assisted tooling.
           </p>
         </Reveal>
 
