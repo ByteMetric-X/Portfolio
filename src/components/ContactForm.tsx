@@ -103,7 +103,7 @@ export function ContactForm() {
                     name="message"
                     required
                     rows={4}
-                    className="w-full border-b border-line bg-transparent px-1 py-3 text-fg outline-none focus:border-fg"
+                    className="w-full resize-none border-b border-line bg-transparent px-1 py-3 text-fg outline-none focus:border-fg"
                   />
                 </div>
 
