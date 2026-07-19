@@ -45,7 +45,7 @@ export function Hero() {
           Hassan / Business Data Analyst
         </motion.p>
 
-        <h1 className="text-balance max-w-4xl overflow-hidden font-display text-[9vw] font-medium leading-[0.98] tracking-tight text-fg md:text-[5.2vw]">
+        <h1 className="text-balance max-w-4xl overflow-hidden font-display text-[clamp(2rem,5.5vw,4rem)] font-medium leading-[1.05] tracking-tight text-fg">
           {HEADLINE_WORDS.map((w, i) => (
             <span key={i} className="mr-[0.28em] inline-block overflow-hidden last:mr-0">
               <span className="word inline-block">{w}</span>
