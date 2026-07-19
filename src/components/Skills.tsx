@@ -78,7 +78,7 @@ function SkillChip({ skill, delay }: { skill: Skill; delay: number }) {
 
 export function Skills() {
   return (
-    <section id="skills" className="border-b border-line px-6 py-16 md:px-12 md:py-24">
+    <section id="skills" className="section-offset border-b border-line px-6 py-14 md:px-12 md:py-20">
       <Reveal>
         <p className="mb-4 font-mono text-xs uppercase tracking-widest text-fg-muted">
           / skills
