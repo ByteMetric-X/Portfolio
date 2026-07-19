@@ -54,13 +54,13 @@ export function Projects() {
   const [open, setOpen] = useState<string | null>(PROJECTS[0].slug)
 
   return (
-    <section id="work" className="border-b border-line px-6 py-16 md:px-12 md:py-24">
+    <section id="work" className="scroll-mt-20 border-b border-line px-6 pt-10 pb-14 md:px-12 md:pt-14 md:pb-20">
       <Reveal>
         <p className="mb-4 font-mono text-xs uppercase tracking-widest text-fg-muted">
           / work
         </p>
         <h2 className="max-w-2xl font-display text-3xl font-medium leading-tight text-fg md:text-4xl">
-          Four things I&apos;ve actually built.
+          Three things I&apos;ve actually built.
         </h2>
       </Reveal>
 
@@ -100,7 +100,7 @@ export function Projects() {
                       transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                       className="overflow-hidden"
                     >
-                      <div className="grid grid-cols-1 gap-8 pb-8 md:grid-cols-[1fr_1fr]">
+                      <div className="grid grid-cols-1 gap-8 items-start pb-6 md:grid-cols-[1fr_1fr]">
                         <div className="space-y-5">
                           <div>
                             <p className="mb-1 font-mono text-xs uppercase tracking-widest text-fg-dim">
@@ -138,7 +138,7 @@ export function Projects() {
                           {p.links && (
                             <div className="mt-6 flex gap-4">
                               {p.links.map((l) => (
-                                <a
+                                
                                   key={l.href}
                                   href={l.href}
                                   target="_blank"
