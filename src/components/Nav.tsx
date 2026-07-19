@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 
 const LINKS = [
@@ -8,10 +8,11 @@ const LINKS = [
   { href: '#contact', label: 'Contact' },
 ]
 
-const TOP_THRESHOLD = 40 // px — nav is visible only above this scroll position
+const TOP_THRESHOLD = 40
 
 export function Nav() {
   const [atTop, setAtTop] = useState(true)
+  const headerRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
     const onScroll = () => setAtTop(window.scrollY < TOP_THRESHOLD)
@@ -20,8 +21,23 @@ export function Nav() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  useEffect(() => {
+    const el = headerRef.current
+    if (!el) return
+
+    const setNavHeight = () => {
+      document.documentElement.style.setProperty('--nav-h', `${el.offsetHeight}px`)
+    }
+    setNavHeight()
+
+    const observer = new ResizeObserver(setNavHeight)
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <motion.header
+      ref={headerRef}
       initial={{ y: -40, opacity: 0 }}
       animate={{
         y: 0,
@@ -37,7 +53,12 @@ export function Nav() {
       </a>
       <nav className="hidden gap-8 md:flex">
         {LINKS.map((l) => (
-          <a key={l.href} href={l.href} data-cursor-hover className="font-mono text-xs uppercase tracking-widest text-fg-muted transition-colors hover:text-fg">
+          
+            key={l.href}
+            href={l.href}
+            data-cursor-hover
+            className="font-mono text-xs uppercase tracking-widest text-fg-muted transition-colors hover:text-fg"
+          >
             {l.label}
           </a>
         ))}
