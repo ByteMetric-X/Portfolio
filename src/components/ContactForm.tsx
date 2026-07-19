@@ -37,7 +37,7 @@ export function ContactForm() {
   }
 
   return (
-    <section id="contact" className="px-6 py-16 md:px-12 md:py-24">
+    <section id="contact" className="section-offset px-6 py-14 md:px-12 md:py-20">
       <Reveal>
         <p className="mb-4 font-mono text-xs uppercase tracking-widest text-fg-muted">
           / contact
@@ -79,7 +79,7 @@ export function ContactForm() {
                     id="name"
                     name="name"
                     required
-                    className="w-full border-b border-line bg-transparent py-2 text-fg outline-none focus:border-fg"
+                    className="w-full border-b border-line bg-transparent px-1 py-3 text-fg outline-none focus:border-fg"
                   />
                 </div>
                 <div>
@@ -117,7 +117,8 @@ export function ContactForm() {
                   type="submit"
                   disabled={status === 'sending'}
                   data-cursor-hover
-                  className="w-full border-b border-line bg-transparent px-1 py-3 text-fg outline-none focus:border-fg"                >
+                  className="border border-fg px-6 py-3 font-mono text-xs uppercase tracking-widest text-fg transition-colors hover:bg-fg hover:text-bg disabled:opacity-50"
+                >
                   {status === 'sending' ? 'Sending…' : 'Send message'}
                 </button>
               </motion.form>
