@@ -106,3 +106,6 @@ textarea:-webkit-autofill:focus {
   caret-color: var(--color-fg);
   transition: background-color 9999s ease-in-out 0s;
 }
+.section-offset {
+  scroll-margin-top: var(--nav-h, 80px);
+}
