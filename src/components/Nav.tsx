@@ -16,8 +16,10 @@ export function Nav() {
 
   useEffect(() => {
     const onScroll = () => setAtTop(window.scrollY < TOP_THRESHOLD)
+
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
+
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
@@ -26,12 +28,17 @@ export function Nav() {
     if (!el) return
 
     const setNavHeight = () => {
-      document.documentElement.style.setProperty('--nav-h', `${el.offsetHeight}px`)
+      document.documentElement.style.setProperty(
+        '--nav-h',
+        `${el.offsetHeight}px`
+      )
     }
+
     setNavHeight()
 
     const observer = new ResizeObserver(setNavHeight)
     observer.observe(el)
+
     return () => observer.disconnect()
   }, [])
 
@@ -48,12 +55,17 @@ export function Nav() {
       style={{ pointerEvents: atTop ? 'auto' : 'none' }}
       className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-5 md:px-12"
     >
-      <a href="#top" data-cursor-hover className="font-display text-sm tracking-widest text-fg uppercase">
+      <a
+        href="#top"
+        data-cursor-hover
+        className="font-display text-sm uppercase tracking-widest text-fg"
+      >
         Hassan
       </a>
+
       <nav className="hidden gap-8 md:flex">
         {LINKS.map((l) => (
-          
+          <a
             key={l.href}
             href={l.href}
             data-cursor-hover
@@ -63,7 +75,12 @@ export function Nav() {
           </a>
         ))}
       </nav>
-      <a href="/resume.pdf" data-cursor-hover className="font-mono text-xs uppercase tracking-widest text-fg-muted transition-colors hover:text-fg">
+
+      <a
+        href="/resume.pdf"
+        data-cursor-hover
+        className="font-mono text-xs uppercase tracking-widest text-fg-muted transition-colors hover:text-fg"
+      >
         Resume ↓
       </a>
     </motion.header>
