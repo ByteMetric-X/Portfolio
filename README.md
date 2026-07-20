@@ -1,86 +1,93 @@
 <div align="center">
 
-# Hassan
-
-### Data Analyst turning raw business data into forecasts and dashboards — built faster with AI-assisted tooling.
-
-📍 Islamabad, Pakistan · 🎓 Business Data Analytics, COMSATS University
-
-<br/>
-
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-000000?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/hassan-shahid-668a8041a)
-[![GitHub](https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ByteMetric-X)
-[![Kaggle](https://img.shields.io/badge/Kaggle-000000?style=for-the-badge&logo=kaggle&logoColor=white)](https://www.kaggle.com/bytemetric0x)
-[![Upwork](https://img.shields.io/badge/Upwork-000000?style=for-the-badge&logo=upwork&logoColor=white)](https://www.upwork.com/freelancers/~01319d1686c0ec36fa?mp_source=share)
-[![Portfolio](https://img.shields.io/badge/Portfolio-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://heymehassan.me)
-[![Email](https://img.shields.io/badge/Email-000000?style=for-the-badge&logo=gmail&logoColor=white)](mailto:heymehassan@gmail.com)
+<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=26&duration=3000&pause=800&color=2ECC71&center=true&vCenter=true&width=560&lines=Hi%2C+I'm+Hassan+%F0%9F%91%8B;Data+Analyst+%7C+ML+%2B+BI;Turning+raw+data+into+decisions;Currently+shipping+heymehassan.me" alt="Typing SVG" />
 
 </div>
 
----
+<div align="center">
+  <code>hassan@terminal ~ $</code> <b>whoami</b>
+</div>
 
-## About
-
-Business Data Analytics student at COMSATS University Islamabad, working as a junior data analyst with a growing full-stack development practice. Core focus is Python, SQL, time series forecasting, and dashboarding — paired with AI-assisted development (LLM APIs, Supabase, React/TypeScript) to move from analysis to shipped tools faster than a traditional analytics-only workflow allows.
-
-**Currently:**
-- Building **Dice**, a full-stack AI chat application
-- Completing the Google Data Analytics Professional Certificate (Coursera)
-- Building a freelance presence on Upwork
-
----
-
-## Skills
-
-**Data Analytics & Machine Learning**
-
-![Python](https://img.shields.io/badge/Python-000000?style=flat-square&logo=python&logoColor=white)
-![SQL](https://img.shields.io/badge/SQL-000000?style=flat-square&logo=postgresql&logoColor=white)
-![scikit--learn](https://img.shields.io/badge/scikit--learn-000000?style=flat-square&logo=scikitlearn&logoColor=white)
-![Pandas](https://img.shields.io/badge/pandas-000000?style=flat-square&logo=pandas&logoColor=white)
-![NumPy](https://img.shields.io/badge/NumPy-000000?style=flat-square&logo=numpy&logoColor=white)
-![Power BI](https://img.shields.io/badge/Power_BI-000000?style=flat-square&logo=powerbi&logoColor=white)
-![Excel](https://img.shields.io/badge/Excel-000000?style=flat-square&logo=microsoftexcel&logoColor=white)
-
-*Also: machine learning fundamentals, statistical analysis, time series forecasting (SARIMAX), DAX, data cleaning & visualization*
-
-**AI-Assisted Development**
-
-![React](https://img.shields.io/badge/React-000000?style=flat-square&logo=react&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-000000?style=flat-square&logo=typescript&logoColor=white)
-![Node.js](https://img.shields.io/badge/Node.js-000000?style=flat-square&logo=nodedotjs&logoColor=white)
-![Supabase](https://img.shields.io/badge/Supabase-000000?style=flat-square&logo=supabase&logoColor=white)
-![OpenRouter](https://img.shields.io/badge/OpenRouter-000000?style=flat-square&logo=openai&logoColor=white)
-
-*Also: REST API integration, LLM-powered application development*
-
-**Tools**
-
-![Git](https://img.shields.io/badge/Git-000000?style=flat-square&logo=git&logoColor=white)
-![VS Code](https://img.shields.io/badge/VS_Code-000000?style=flat-square&logo=visualstudiocode&logoColor=white)
-![Jupyter](https://img.shields.io/badge/Jupyter-000000?style=flat-square&logo=jupyter&logoColor=white)
-
----
-
-## Projects
-
-| Project | Summary | Stack |
-|---|---|---|
-| **Dice** | Full-stack AI chat application — authentication, chat persistence, per-project system instructions | React · TypeScript · Node/Express · Supabase · OpenRouter |
-| **ENGRO Stock Forecasting** | SARIMAX time series model forecasting ENGRO share price — RMSE ≈ 22 PKR on held-out test data *(university group project)* | Python · scikit-learn · statsmodels · pandas |
-| **Financial Data Extraction Pipeline** | Bulk historical price extraction across tickers into formatted Excel output | Python · yfinance · openpyxl |
-| **This portfolio** | Motion-driven personal site deployed on GitHub Pages | React · Tailwind · Framer Motion · Supabase |
-
-Full case studies (problem → approach → result) for each project are on **[heymehassan.me](https://heymehassan.me)**.
-
----
-
-## Let's connect
-
-Working on something data-heavy, or want to talk forecasting, dashboards, or AI-assisted builds? Reach out on my socials above.
+<div align="center">
+  <code>hassan@terminal ~ $</code> <b>./skills.sh</b>
+</div>
 
 <div align="center">
 
-*Built with 🖤 and a lot of coffee.*
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![SQL](https://img.shields.io/badge/SQL-4479A1?style=for-the-badge&logo=postgresql&logoColor=white)
+![Pandas](https://img.shields.io/badge/pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-3FCF8E?style=for-the-badge&logo=supabase&logoColor=white)
+![Power BI](https://img.shields.io/badge/Power_BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)
+![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
 
+</div>
+
+<div align="center">
+  <code>hassan@terminal ~ $</code> <b>ls projects/</b>
+</div>
+
+<table align="center">
+<tr>
+<td width="50%" valign="top">
+
+**🔍 Fraud Detection Engine**
+Logistic Regression model on 284,807 credit-card transactions, 98.5% accuracy. Full EDA → feature engineering → evaluation pipeline.
+
+</td>
+<td width="50%" valign="top">
+
+**📈 ENGRO Stock Forecasting**
+Time-series forecasting with ARIMA/SARIMAX to model ENGRO stock price behavior and trend seasonality.
+
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+
+**💬 Sentiment Classification Pipeline**
+Multilingual movie reviews → VADER labeling → TF-IDF + custom features → Linear SVC (100% test acc) → tracked with MLflow → served via FastAPI.
+
+</td>
+<td width="50%" valign="top">
+
+**🚗 Automotive Analytics Dashboard**
+End-to-end EDA and interactive Chart.js dashboard, plus a Power BI–ready dataset with a full DAX build guide.
+
+</td>
+</tr>
+</table>
+
+<div align="center">
+  <code>hassan@terminal ~ $</code> <b>./contributions.sh</b>
+</div>
+
+<div align="center">
+
+<img src="https://github-readme-stats.vercel.app/api?username=ByteMetric-X&show_icons=true&theme=dark&hide_border=true&count_private=true" height="165"/>
+<img src="https://github-readme-streak-stats.herokuapp.com/?user=ByteMetric-X&theme=dark&hide_border=true" height="165"/>
+
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=ByteMetric-X&layout=compact&theme=dark&hide_border=true" height="165"/>
+
+</div>
+
+<div align="center">
+  <code>hassan@terminal ~ $</code> <b>./connect.sh</b>
+</div>
+
+<div align="center">
+
+[![Portfolio](https://img.shields.io/badge/PORTFOLIO-heymehassan.me-2ECC71?style=for-the-badge)](https://heymehassan.me)
+[![Upwork](https://img.shields.io/badge/UPWORK-Hire_me-14a800?style=for-the-badge&logo=upwork&logoColor=white)](#)
+[![LinkedIn](https://img.shields.io/badge/LINKEDIN-Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](#)
+[![Email](https://img.shields.io/badge/EMAIL-Reach_out-D14836?style=for-the-badge&logo=gmail&logoColor=white)](#)
+
+</div>
+
+<div align="center">
+<sub>Built with data, caffeine, and one too many terminal windows open.</sub>
 </div>
