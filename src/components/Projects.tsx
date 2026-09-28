@@ -20,10 +20,10 @@ const PROJECTS: Project[] = [
     tag: 'University group project',
     stack: ['Python', 'SARIMAX', 'pandas', 'statsmodels'],
     problem:
-      'Forecast ENGRO’s share price with a defensible, testable model rather than a curve-fit demo—for a 3-person university project.',
+      'Forecast ENGRO\u2019s share price with a defensible, testable model rather than a curve-fit demo\u2014for a 3-person university project.',
     approach:
       'Built and tuned a SARIMAX time series model on historical price data, validated on a held-out test window rather than in-sample fit.',
-    result: 'RMSE ≈ 22 PKR on held-out test data.',
+    result: 'RMSE \u2248 22 PKR on held-out test data.',
   },
   {
     slug: 'financial-extraction',
@@ -39,15 +39,15 @@ const PROJECTS: Project[] = [
   },
   {
     slug: 'uber-pricing',
-    name: 'Uber Pricing Optimization — NYC',
+    name: 'Uber Pricing Optimization \u2014 NYC',
     tag: 'Personal build',
     stack: ['Python', 'pandas', 'scikit-learn', 'statsmodels', 'GeoPy', 'seaborn'],
     problem:
-      'A flat per-mile fare ignores how NYC ride demand actually shifts by borough, time of day, and day of week — leaving revenue on the table during peak windows.',
+      'A flat per-mile fare ignores how NYC ride demand actually shifts by borough, time of day, and day of week \u2014 leaving revenue on the table during peak windows.',
     approach:
-      'Cleaned and geo-validated 200K trip records down to a 64K analysis sample, engineered pickup-zone and time-of-day features, then fit a linear regression (R² = 0.72) to isolate each factor before layering a rules-based ±20% dynamic pricing model on top.',
+      'Cleaned and geo-validated 200K trip records down to a 64K analysis sample, engineered pickup-zone and time-of-day features, then fit a linear regression (R\u00B2 = 0.72) to isolate each factor before layering a rules-based \u00B120% dynamic pricing model on top.',
     result:
-      'Projected +11.6% revenue lift ($617K → $689K) across 64,127 trips, with trip distance as the dominant driver and borough/time/day as secondary adjustments.',
+      'Projected +11.6% revenue lift ($617K \u2192 $689K) across 64,127 trips, with trip distance as the dominant driver and borough/time/day as secondary adjustments.',
     links: [
       {
         label: 'Open in Colab',
@@ -62,7 +62,7 @@ const PROJECTS: Project[] = [
   {
     slug: 'dice',
     name: 'Dice',
-    tag: 'Personal build — in progress',
+    tag: 'Personal build \u2014 in progress',
     stack: [
       'Vite',
       'React',
@@ -77,7 +77,7 @@ const PROJECTS: Project[] = [
     approach:
       'Built auth and chat persistence on Supabase, a conversations sidebar with auto-titling, and a Projects feature for scoped system instructions, integrated with OpenRouter for model access.',
     result:
-      'A working full-stack app covering auth, persistence, and a custom project system—currently local and private.',
+      'A working full-stack app covering auth, persistence, and a custom project system\u2014currently local and private.',
     links: [
       {
         label: 'GitHub',
@@ -120,7 +120,7 @@ export function Projects() {
                 >
                   <div>
                     <div className="mb-1 font-mono text-xs uppercase tracking-widest text-fg-dim">
-                      /projects/{p.slug} — {p.tag}
+                      /projects/{p.slug} &mdash; {p.tag}
                     </div>
 
                     <h3 className="font-display text-xl text-fg md:text-2xl">
@@ -206,7 +206,7 @@ export function Projects() {
                                   data-cursor-hover
                                   className="font-mono text-xs uppercase tracking-widest text-fg underline underline-offset-4"
                                 >
-                                  {l.label} ↗
+                                  {l.label} &#8599;
                                 </a>
                               ))}
                             </div>
