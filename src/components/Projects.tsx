@@ -198,7 +198,7 @@ export function Projects() {
                           {p.links && (
                             <div className="mt-6 flex gap-4">
                               {p.links.map((l) => (
-                                
+                                <a
                                   key={l.href}
                                   href={l.href}
                                   target="_blank"
