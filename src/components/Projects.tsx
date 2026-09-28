@@ -38,6 +38,28 @@ const PROJECTS: Project[] = [
       'Turns a multi-ticker manual pull into a single script run with formatted output.',
   },
   {
+    slug: 'uber-pricing',
+    name: 'Uber Pricing Optimization — NYC',
+    tag: 'Personal build',
+    stack: ['Python', 'pandas', 'scikit-learn', 'statsmodels', 'GeoPy', 'seaborn'],
+    problem:
+      'A flat per-mile fare ignores how NYC ride demand actually shifts by borough, time of day, and day of week — leaving revenue on the table during peak windows.',
+    approach:
+      'Cleaned and geo-validated 200K trip records down to a 64K analysis sample, engineered pickup-zone and time-of-day features, then fit a linear regression (R² = 0.72) to isolate each factor before layering a rules-based ±20% dynamic pricing model on top.',
+    result:
+      'Projected +11.6% revenue lift ($617K → $689K) across 64,127 trips, with trip distance as the dominant driver and borough/time/day as secondary adjustments.',
+    links: [
+      {
+        label: 'Open in Colab',
+        href: 'https://colab.research.google.com/github/ByteMetric-X/Portfolio/blob/main/notebooks/UBER_GFP.ipynb',
+      },
+      {
+        label: 'Project Poster',
+        href: 'https://heymehassan.me/projects/uber-pricing-poster.html',
+      },
+    ],
+  },
+  {
     slug: 'dice',
     name: 'Dice',
     tag: 'Personal build — in progress',
@@ -79,7 +101,7 @@ export function Projects() {
         </p>
 
         <h2 className="max-w-2xl font-display text-3xl font-medium leading-tight text-fg md:text-4xl">
-          Three things I&apos;ve actually built.
+          A few things I&apos;ve actually built.
         </h2>
       </Reveal>
 
@@ -176,7 +198,7 @@ export function Projects() {
                           {p.links && (
                             <div className="mt-6 flex gap-4">
                               {p.links.map((l) => (
-                                <a
+                                
                                   key={l.href}
                                   href={l.href}
                                   target="_blank"
